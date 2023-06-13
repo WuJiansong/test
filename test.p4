@@ -117,7 +117,7 @@ struct headers {
 parser MyParser(packet_in packet,
                 out headers hdr,
                 inout metadata meta,
-                inout standard_metadata_t standard_metadata) {
+                inout ingress_metadata_t standard_metadata) {
 
 state start{
           /* TODO 1: parse ethernet header */
@@ -179,7 +179,7 @@ control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
 
 control MyIngress(inout headers hdr,
                   inout metadata meta,
-                  inout standard_metadata_t standard_metadata) {
+                  inout ingress_metadata_t standard_metadata) {
 
     
     apply {
@@ -258,7 +258,7 @@ control MyIngress(inout headers hdr,
 
 control MyEgress(inout headers hdr,
                  inout metadata meta,
-                 inout standard_metadata_t standard_metadata) {
+                 inout egress_metadata_t standard_metadata) {
     apply {  }
 }
 
