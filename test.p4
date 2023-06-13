@@ -179,7 +179,10 @@ control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
 
 control MyIngress(inout headers hdr,
                   inout metadata meta,
-                  inout ingress_intrinsic_metadata_t standard_metadata) {
+		  in ingress_intrinsic_metadata_t ig_intr_md,
+        	in ingress_intrinsic_metadata_from_parser_t ig_intr_prsr_md,
+        	inout ingress_intrinsic_metadata_for_deparser_t ig_intr_dprsr_md,
+        	inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
     
     apply {
@@ -223,9 +226,9 @@ control MyIngress(inout headers hdr,
 
        /* TODO 3: set output port    */
        if (hdr.udp.dstport == 0x18db){
-        standard_metadata.egress_port = 2;
+        ig_intr_tm_md.ucast_egress_port = 2;
         } else {
-       standard_metadata.egress_port = 1;
+       ig_intr_tm_md.ucast_egress_port = 1;
         }
 
         if (hdr.udp.dstport == 0x18db){
