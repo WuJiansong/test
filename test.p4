@@ -277,7 +277,10 @@ control MyComputeChecksum(inout headers  hdr, inout metadata meta) {
 ***********************  D E P A R S E R  *******************************
 *************************************************************************/
 
-control MyDeparser(packet_out packet, in headers hdr) {
+control MyDeparser(packet_out packet, 
+inout headers hdr,
+        in metadata_t ig_md,
+        in ingress_intrinsic_metadata_for_deparser_t ig_intr_dprsr_md)) {
     apply {
                 packet.emit(hdr.eth);
                 packet.emit(hdr.ipv4_2);
