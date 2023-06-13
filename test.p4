@@ -117,7 +117,7 @@ struct headers {
 parser MyParser(packet_in packet,
                 out headers hdr,
                 inout metadata meta,
-                inout ingress_metadata_t standard_metadata) {
+                out ingress_intrinsic_metadata_t standard_metadata) {
 
 state start{
           /* TODO 1: parse ethernet header */
@@ -179,7 +179,7 @@ control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
 
 control MyIngress(inout headers hdr,
                   inout metadata meta,
-                  inout ingress_metadata_t standard_metadata) {
+                  inout ingress_intrinsic_metadata_t standard_metadata) {
 
     
     apply {
@@ -223,9 +223,9 @@ control MyIngress(inout headers hdr,
 
        /* TODO 3: set output port    */
        if (hdr.udp.dstport == 0x18db){
-        standard_metadata.egress_spec = 2;
+        standard_metadata.egress_port = 2;
         } else {
-       standard_metadata.egress_spec = 1;
+       standard_metadata.egress_port = 1;
         }
 
         if (hdr.udp.dstport == 0x18db){
@@ -258,7 +258,7 @@ control MyIngress(inout headers hdr,
 
 control MyEgress(inout headers hdr,
                  inout metadata meta,
-                 inout egress_metadata_t standard_metadata) {
+                 out ingress_intrinsic_metadata_t standard_metadata) {
     apply {  }
 }
 
