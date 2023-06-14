@@ -164,13 +164,6 @@ state parse_ipv4_3{
 
 }
 
-/*************************************************************************
-************   C H E C K S U M    V E R I F I C A T I O N   *************
-*************************************************************************/
-
-control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
-    apply {  }
-}
 
 
 /*************************************************************************
@@ -259,19 +252,15 @@ control MyIngress(inout headers hdr,
 ****************  E G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
 
-control MyEgress(inout headers hdr,
-                 inout metadata meta,
-                 out ingress_intrinsic_metadata_t standard_metadata) {
+control MyEgress(inout header_t hdr,
+    inout metadata eg_md,
+    in egress_intrinsic_metadata_t eg_intr_md,
+    in egress_intrinsic_metadata_from_parser_t eg_intr_md_from_prsr,
+    inout egress_intrinsic_metadata_for_deparser_t eg_intr_dprs_md,
+    inout egress_intrinsic_metadata_for_output_port_t eg_intr_oport_md) {
     apply {  }
 }
 
-/*************************************************************************
-*************   C H E C K S U M    C O M P U T A T I O N   **************
-*************************************************************************/
-
-control MyComputeChecksum(inout headers  hdr, inout metadata meta) {
-    apply { }
-}
 
 /*************************************************************************
 ***********************  D E P A R S E R  *******************************
@@ -303,11 +292,11 @@ inout headers hdr,
 
 Pipeline(
     MyParser(),
-    MyVerifyChecksum(),
     MyIngress(),
+    MyDeparser(),
+    MyEgressParser(),
     MyEgress(),
-    MyComputeChecksum(),
-    MyDeparser()
+    MyEgressDeparser()
 ) pipe;
 
 Switch(pipe) main;
