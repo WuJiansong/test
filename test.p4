@@ -285,6 +285,23 @@ inout headers hdr,
     /* TODO 4: deparse ethernet header */
     }
 }
+/////////////////////////////////////////////////////////////////////////////
+
+parser EgressParser(
+    packet_in pkt,
+    out header_t hdr,
+    out metadata eg_md,
+    out egress_intrinsic_metadata_t eg_intr_md) {
+    
+    }
+  
+control EgressDeparser(
+    packet_out pkt,
+    inout header_t hdr,
+    in metadata eg_md,
+    in egress_intrinsic_metadata_for_deparser_t eg_intr_dprs_md) {
+    
+    }
 
 /*************************************************************************
 ***********************  S W I T C H  *******************************
