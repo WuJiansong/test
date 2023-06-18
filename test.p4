@@ -116,7 +116,7 @@ struct headers {
 
 parser MyParser(packet_in packet,
                 out headers hdr,
-                inout metadata meta,
+                out metadata meta,
                 out ingress_intrinsic_metadata_t standard_metadata) {
 
 state start{
