@@ -252,7 +252,7 @@ control MyIngress(inout headers hdr,
 ****************  E G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
 
-control MyEgress(inout header_t hdr,
+control MyEgress(inout headers hdr,
     inout metadata eg_md,
     in egress_intrinsic_metadata_t eg_intr_md,
     in egress_intrinsic_metadata_from_parser_t eg_intr_md_from_prsr,
@@ -289,7 +289,7 @@ inout headers hdr,
 
 parser EgressParser(
     packet_in pkt,
-    out header_t hdr,
+    out headers hdr,
     out metadata eg_md,
     out egress_intrinsic_metadata_t eg_intr_md) {
     
@@ -297,7 +297,7 @@ parser EgressParser(
   
 control EgressDeparser(
     packet_out pkt,
-    inout header_t hdr,
+    inout headers hdr,
     in metadata eg_md,
     in egress_intrinsic_metadata_for_deparser_t eg_intr_dprs_md) {
     
