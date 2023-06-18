@@ -269,7 +269,7 @@ control MyEgress(inout headers hdr,
 control MyDeparser(packet_out packet, 
 inout headers hdr,
         in metadata ig_md,
-        in ingress_intrinsic_metadata_for_deparser_t ig_intr_dprsr_md)) {
+        in ingress_intrinsic_metadata_for_deparser_t ig_intr_dprsr_md) {
     apply {
                 packet.emit(hdr.eth);
                 packet.emit(hdr.ipv4_2);
