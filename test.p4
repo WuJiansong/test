@@ -319,9 +319,9 @@ Pipeline(
     MyParser(),
     MyIngress(),
     MyDeparser(),
-    MyEgressParser(),
-    MyEgress(),
-    MyEgressDeparser()
+    EmptyEgressParser(),
+    EmptyEgress(),
+    EmptyEgressDeparser()
 ) pipe;
 
 Switch(pipe) main;
